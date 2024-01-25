@@ -12,19 +12,28 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Grid;
+
 
 class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
+    protected static ?string $navigationGroup = 'Marketing';
     public static function form(Form $form): Form
     {
+
         return $form
+        ->schema([
+            Section::make('Data Perusahaan')
+            ->schema([
+            Grid::make(3)
             ->schema([
                 Forms\Components\Select::make('bu')
-                ->label("Badan Usaha")
+                ->label("BU")
                 ->options([
                     "PT" => "PT",
                     "CV" => "CV",
@@ -36,29 +45,75 @@ class CustomerResource extends Resource
                     "Firma" => "Firma",
                 ]),
                 Forms\Components\TextInput::make('nama')
-                ->label("Nama Buyer")
+                ->label("Name")
                 ->required(),
                 Forms\Components\TextInput::make('npwp')
-                ->label("Nomor NPWP"),
-                Forms\Components\TextInput::make('up')
-                ->label("Untuk Perhatian"),
-                Forms\Components\TextInput::make('kontak')
+                ->label("Number NPWP"),
+                Forms\Components\TextInput::make('kpk1')
                 ->required()
-                ->label("Nomor Kontak"),
+                ->label("Name KPK 1"),
+                Forms\Components\TextInput::make('kpk2')
+                ->label("Name KPK 2"),
                 Forms\Components\TextInput::make('email')
-                ->label("Email")
+                ->label("OFfice Email")
                 ->email(),
+                Forms\Components\TextInput::make('telepon_kantor')
+                ->label("Office Phone"),
                 Forms\Components\Textarea::make('alamat_kantor')
-                ->label("Alamat Kantor")
+                ->label("Office Address")
+                ->required(),
+                Forms\Components\TextInput::make('kota')
                 ->required()
-                ->maxLength(65535)
-                ->columnSpan('full'),
-                Forms\Components\Textarea::make('alamat_kirim')
-                ->label("Alamat Kirim")
-                ->maxLength(65535)
-                ->required()
-                ->columnSpan('full'),
-            ]);
+                ->label("City"),
+            ]),
+        ]),
+                Section::make('PIC Contact ')
+                ->schema([
+                Grid::make(3)
+                ->schema([
+                    Forms\Components\TextInput::make('pic1')
+                    ->required()
+                    ->label("Name PIC 1"),
+                    Forms\Components\TextInput::make('pic_phone1')
+                    ->required()
+                    ->label("PIC Phone 1"),
+                    Forms\Components\TextInput::make('pic_email1')
+                    ->label("PIC Email 1"),
+                    Forms\Components\TextInput::make('pic2')
+                    ->label("Name PIC 2"),
+                    Forms\Components\TextInput::make('pic_phone2')
+                    ->label("PIC Phone 2"),
+                    Forms\Components\TextInput::make('pic_email2')
+                    ->label("PIC Email 2"),
+                    Forms\Components\TextInput::make('pic3')
+                    ->label("Name PIC 3"),
+                    Forms\Components\TextInput::make('pic_phone3')
+                    ->label("PIC Phone 3"),
+                    Forms\Components\TextInput::make('pic_email3')
+                    ->label("PIC Email 3"),
+                ]),
+            ]),
+            Section::make('Sent Addres')
+                ->schema([
+                Grid::make(1)
+                ->schema([
+                    Forms\Components\Textarea::make('alamat_kirim1')
+                    ->label("Send Address 1")
+                    ->maxLength(65535)
+                    ->required()
+                    ->columnSpan('full'),
+                    Forms\Components\Textarea::make('alamat_kirim2')
+                    ->label("Send Address 2")
+                    ->maxLength(65535)
+                    ->columnSpan('full'),
+                    Forms\Components\Textarea::make('alamat_kirim3')
+                    ->label("Send Address 3")
+                    ->maxLength(65535)
+                    ->columnSpan('full'),
+                ]),
+            ]),
+        ]);
+
     }
 
     public static function table(Table $table): Table
@@ -71,13 +126,14 @@ class CustomerResource extends Resource
                 Tables\Columns\TextColumn::make('nama')
                 ->label("Nama")
                 ->searchable(),
-                Tables\Columns\TextColumn::make('npwp')
+                Tables\Columns\TextColumn::make('email')
                 ->label("No NPWP"),
-                Tables\Columns\TextColumn::make('up')
-                ->label("UP"),
-                Tables\Columns\TextColumn::make('kontak')
-                ->label("Kontak"),
-                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('pic1')
+                ->label("PIC"),
+                Tables\Columns\TextColumn::make('pic_phone1')
+                ->label("Kontak PIC"),
+                Tables\Columns\TextColumn::make('pic_email1')
+                ->label("Email PIC"),
             ])
             ->filters([
                 //

@@ -13,19 +13,18 @@ return new class extends Migration
     {
         Schema::create('kpks', function (Blueprint $table) {
             $table->id();
+            $table->string("no_kpk")->unique();
             $table->date("tanggal");
-            $table->string("po");
             $table->unsignedBigInteger("customer_id");
-            $table->string("jenis");
-            $table->bigInteger("harga");
-            $table->string('harga_perukuran');
-            $table->string("ppn");
-            $table->string("proses")->nullable();
-            $table->string("quantity");
-            $table->string("ukuran_satuan");
-            $table->string("warna")->nullable();
+            $table->string("attn")->nullable();
+            $table->string("po");
+            $table->string("perihal")->nullable();
+            $table->string("proses_makloon")->nullable();
+            $table->string("keterangan")->nullable();
+            $table->string("top")->nullable();
+            $table->string('delivery');
+            $table->string("packing");
             $table->string("remarks")->nullable();
-
 
             $table->foreign('customer_id')->references('id')->on("Customers");
             $table->timestamps();

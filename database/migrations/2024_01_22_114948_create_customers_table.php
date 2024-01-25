@@ -16,11 +16,24 @@ return new class extends Migration
             $table->string('bu')->nullable();
             $table->string("nama");
             $table->string('npwp')->nullable();
-            $table->string('up');
-            $table->string('kontak');
+            $table->string('kpk1');
+            $table->string('kpk2')->nullable();
+            $table->text('alamat_kantor');
+            $table->string('kota');
+            $table->string('telepon_kantor')->nullable();
             $table->string('email')->nullable();
-            $table->string('alamat_kantor');
-            $table->string('alamat_kirim');
+            $table->string('pic1');
+            $table->string('pic_phone1');
+            $table->string('pic_email1')->nullable();
+            $table->string('pic2')->nullable();
+            $table->string('pic_phone2')->nullable();
+            $table->string('pic_email2')->nullable();
+            $table->string('pic3')->nullable();
+            $table->string('pic_phone3')->nullable();
+            $table->string('pic_email3')->nullable();
+            $table->text('alamat_kirim1');
+            $table->text('alamat_kirim2')->nullable();
+            $table->text('alamat_kirim3')->nullable();
             $table->timestamps();
         });
     }

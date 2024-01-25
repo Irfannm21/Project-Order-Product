@@ -19,52 +19,44 @@ class KpkResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Marketing';
+    public static function getNavigationLabel(): string
+        {
+            return 'Data KPK';
+        }
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('no_kpk')
+                ->label("Nomor KPK")
+                ->required(),
                 Forms\Components\DatePicker::make('tanggal')
                 ->label("Tanggal")
                 ->required()
                 ->maxDate(now()),
-                Forms\Components\TextInput::make('po')
-                ->label("Nomor PO")
-                ->required(),
                 Forms\Components\Select::make('customer_id')
                 ->relationship('customer', 'nama')
                 ->searchable()
                 ->preload()
                 ->required(),
-                Forms\Components\TextInput::make('jenis')
-                ->label("Jenis")
+                Forms\Components\TextInput::make('attn')
+                ->label("Attn"),
+                Forms\Components\TextInput::make('po')
+                ->label("Nomor PO")
                 ->required(),
-                Forms\Components\TextInput::make('harga')
-                ->label("Harga")
-                ->numeric()
-                ->prefix('Rp')
-                ->required(),
-                Forms\Components\Select::make('harga_perukuran')
-                ->label("Harga Perukuran")
-                ->options([
-                    "M" => "M",
-                    "KG" => "KG",
-                ]),
-                Forms\Components\TextInput::make('ppn')
-                ->label("Pajak PPN")
-                ->required(),
-                Forms\Components\TextInput::make('proses')
-                ->label("Proses"),
-                Forms\Components\TextInput::make('quantity')
-                ->label("Quantity"),
-                Forms\Components\Select::make('ukuran_satuan')
-                ->label("Harga Perukuran")
-                ->options([
-                    "MTR" => "MTR",
-                    "BALL" => "BALL",
-                ]),
-                Forms\Components\TextInput::make('warna')
-                ->label("Warna")
-                ->required(),
+                Forms\Components\TextInput::make('perihal')
+                ->label("Perihal"),
+                Forms\Components\TextInput::make('proses_makloon')
+                ->label("Proses Makloon"),
+                Forms\Components\TextInput::make('keterangan')
+                ->label("Keterangan"),
+                Forms\Components\TextInput::make('top')
+                ->label("Term Of Payment"),
+                Forms\Components\TextInput::make('delivery')
+                ->label("Delivery"),
+                Forms\Components\TextInput::make('packing')
+                ->label("Packing"),
                 Forms\Components\TextInput::make('remarks')
                 ->label("Remarks"),
             ]);
