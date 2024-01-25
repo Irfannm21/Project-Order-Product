@@ -20,5 +20,9 @@ class kpk extends Model
         return $this->belongsTo(Customer::class);
     }
 
+    public function details() {
+        return $this->belongsTo(Customer::class, 'kpk_id');
+    }
+
 
 }
